@@ -8,4 +8,6 @@ build/
 .idea/*
 .vscode/*
 pubspec.lock
-.fvm/*
+
+# FVM Version Cache
+.fvm/

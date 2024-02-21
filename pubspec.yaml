@@ -1,23 +1,22 @@
 name: modal_progress_hud_nsn
 description: A modal progress indicator widget with Sound Null Safety. A fork of https://github.com/mmcc007/modal_progress_hud
-version: 0.4.1
-author: Àlex Garcia
+version: 0.4.2
 homepage: https://github.com/alexxgarci/modal_progress_hud_nsn
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  plugin_platform_interface: ^2.1.6
+  plugin_platform_interface: ^2.1.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.1
 
 flutter:
   plugin:

@@ -43,7 +43,7 @@ class ModalProgressHUD extends StatelessWidget {
   final double blur;
 
   const ModalProgressHUD({
-    Key? key,
+    super.key,
     required this.inAsyncCall,
     this.opacity = 0.3,
     this.color = Colors.grey,
@@ -52,7 +52,7 @@ class ModalProgressHUD extends StatelessWidget {
     this.dismissible = false,
     required this.child,
     this.blur = 0.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

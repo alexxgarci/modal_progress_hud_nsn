@@ -1,8 +1,8 @@
 group 'boi.walle.modal_progress_hud_nsn'
-version '0.4.0'
+version '0.4.2'
 
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.8.10'
     repositories {
         google()
         mavenCentral()
@@ -41,6 +41,6 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 24
     }
 }
