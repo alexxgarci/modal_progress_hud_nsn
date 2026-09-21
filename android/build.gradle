@@ -2,15 +2,9 @@ group 'boi.walle.modal_progress_hud_nsn'
 version '0.4.2'
 
 buildscript {
-    ext.kotlin_version = '1.8.10'
     repositories {
         google()
         mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -22,7 +16,20 @@ allprojects {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+
+// AGP 9+ has built-in Kotlin support unless the consumer opts out via
+// android.builtInKotlin=false. Applying kotlin-android unconditionally (and
+// pinning our own AGP/Kotlin Gradle Plugin classpath above) forces a
+// gradle813-compat KGP variant for this module that breaks how its compiled
+// classes resolve into the consuming app's classpath under AGP 9/Gradle 9.
+def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0] as int
+def builtInKotlin = providers.gradleProperty("android.builtInKotlin")
+        .map { it.toBoolean() }
+        .orElse(agpMajor >= 9)
+        .get()
+if (agpMajor < 9 || !builtInKotlin) {
+    apply plugin: 'kotlin-android'
+}
 
 android {
     compileSdkVersion 34
@@ -34,15 +41,19 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
         minSdkVersion 21
+    }
+}
+
+plugins.withId("org.jetbrains.kotlin.android") {
+    kotlin {
+        compilerOptions {
+            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8
+        }
     }
 }
